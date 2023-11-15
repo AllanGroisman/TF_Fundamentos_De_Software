@@ -1,5 +1,11 @@
 package br.fds.Persistencia;
 
-public class IRepOrcamentosJPA {
-    
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import br.fds.Dominio.Entidades.Entidades.Orcamento;
+
+public interface IRepOrcamentosJPA extends CrudRepository<Orcamento,Long> {
+    List<Orcamento> findAll();
 }
