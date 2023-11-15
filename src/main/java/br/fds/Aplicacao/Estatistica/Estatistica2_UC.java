@@ -3,7 +3,7 @@ package br.fds.Aplicacao.Estatistica;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.fds.Dominio.Entidades.ServicoEstatistica;
+import br.fds.Dominio.ServicoEstatistica;
 
 @Component
 public class Estatistica2_UC {
@@ -11,6 +11,6 @@ public class Estatistica2_UC {
     private ServicoEstatistica servicoEstatistica;
 
     public void run() {
-        return servicoEstatistica.estatistica2();
+       // return servicoEstatistica.estatistica2();
     }
 }

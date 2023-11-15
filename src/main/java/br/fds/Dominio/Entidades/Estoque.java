@@ -1,10 +1,7 @@
 
-package br.fds.Dominio.Entidades.Entidades;
+package br.fds.Dominio.Entidades;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Entity;

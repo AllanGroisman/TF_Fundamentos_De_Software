@@ -1,4 +1,4 @@
-package br.fds.Dominio.Entidades.Desconto;
+package br.fds.Dominio.Desconto;
 
 public class DescontoValorMedio implements IDesconto {
 

@@ -3,11 +3,15 @@ package br.fds.Interface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.fds.Aplicacao.Servico.BuscaProdDisponivel_UC;
 import br.fds.Aplicacao.Servico.EfetivarCompra_UC;
 import br.fds.Aplicacao.Servico.SolicOrcamento_UC;
 
+@RestController
+@RequestMapping("/servicos")
 public class ControllerServicos {
     BuscaProdDisponivel_UC buscaProdDisponivel_UC;
     EfetivarCompra_UC efetivarCompra_UC;

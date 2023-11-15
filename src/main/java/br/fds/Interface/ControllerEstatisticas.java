@@ -28,21 +28,21 @@ public class ControllerEstatisticas {
 
     // Chamar estatistica 1
     @GetMapping("/estatistica1")
-    @CrossOrigin
+    @CrossOrigin("*")
     public int estatistica1() {
         return 1;
     }
 
     // Chamar estatistica 2
     @GetMapping("/estatistica2")
-    @CrossOrigin
+    @CrossOrigin("*")
     public int estatistica2() {
         return 2;
     }
 
     // Chamar estatistica 3
     @GetMapping("/estatistica3")
-    @CrossOrigin
+    @CrossOrigin("*")
     public int estatistica3() {
         return 3;
     }

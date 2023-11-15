@@ -1,4 +1,4 @@
-package br.fds.Dominio.Entidades.Entidades;
+package br.fds.Dominio.Entidades;
 
 import java.util.Map;
 

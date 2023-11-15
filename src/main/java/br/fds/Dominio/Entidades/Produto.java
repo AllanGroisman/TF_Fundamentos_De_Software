@@ -1,4 +1,4 @@
-package br.fds.Dominio.Entidades.Entidades;
+package br.fds.Dominio.Entidades;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,9 +1,9 @@
-package br.fds.Dominio.Entidades.Desconto;
+package br.fds.Dominio.Desconto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.fds.Dominio.Entidades.Entidades.Orcamento;
+
 
 public class DescontoFactory {
     public static IDesconto criarDesconto(String cliente){

@@ -1,7 +1,4 @@
-package br.fds.Dominio.Entidades.Desconto;
-
-import br.fds.Dominio.Entidades.Entidades.Pedido;
-import br.fds.Persistencia.RepOrcamentosJPA;
+package br.fds.Dominio.Desconto;
 
 public class DescontoPadrao implements IDesconto {
 
