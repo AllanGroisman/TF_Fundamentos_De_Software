@@ -1,4 +1,4 @@
-package br.fds.Dominio;
+package br.fds.Dominio.Servicos;
 
 //import java.util.ArrayList;
 //import java.util.List;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import br.fds.Dominio.Entidades.Orcamento;
 import br.fds.Dominio.Entidades.Pedido;
 //import br.fds.Dominio.Entidades.Produto;
+import br.fds.Dominio.Interfaces.IRepOrcamentos;
+import br.fds.Dominio.Interfaces.IRepProdutos;
 
 @Service
 public class ServicoVenda {

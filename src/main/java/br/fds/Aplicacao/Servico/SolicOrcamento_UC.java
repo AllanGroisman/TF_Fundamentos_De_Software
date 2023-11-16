@@ -5,8 +5,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.fds.Dominio.ServicoVenda;
 import br.fds.Dominio.Entidades.Orcamento;
+import br.fds.Dominio.Servicos.ServicoVenda;
 
 @Component
 public class SolicOrcamento_UC {

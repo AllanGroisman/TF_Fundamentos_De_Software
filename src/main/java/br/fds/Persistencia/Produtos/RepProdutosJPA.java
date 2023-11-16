@@ -1,7 +1,7 @@
 package br.fds.Persistencia.Produtos;
 
-import br.fds.Dominio.IRepProdutos;
 import br.fds.Dominio.Entidades.Produto;
+import br.fds.Dominio.Interfaces.IRepProdutos;
 
 import java.util.List;
 

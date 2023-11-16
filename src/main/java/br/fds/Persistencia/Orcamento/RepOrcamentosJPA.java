@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import br.fds.Dominio.IRepOrcamentos;
 import br.fds.Dominio.Entidades.Orcamento;
+import br.fds.Dominio.Interfaces.IRepOrcamentos;
 
 @Repository
 @Primary

@@ -1,4 +1,4 @@
-package br.fds.Dominio;
+package br.fds.Dominio.Interfaces;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package br.fds.Dominio;
+package br.fds.Dominio.Servicos;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.fds.Dominio.Entidades.Produto;
+import br.fds.Dominio.Interfaces.IRepProdutos;
 
 @Service
 public class ServicoEstoque {

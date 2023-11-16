@@ -51,12 +51,12 @@ public class ControllerServicos {
     @GetMapping("/orcamento/{cliente}/{produto}/{quantidade}")
     @CrossOrigin("*")
     // Solicitar orcamento (por enquanto com 1)
-    public Orcamento solicitarOrcamento(@PathVariable("cliente") String cliente,
+    public String solicitarOrcamento(@PathVariable("cliente") String cliente,
             @PathVariable("produto") String produto, @PathVariable("quantidade") String quantidade) {
 
         Map<Long, Integer> listaProd = new HashMap<Long, Integer>();
         listaProd.put(Long.parseLong(produto), Integer.parseInt(quantidade));
-        return solicOrcamento_UC.run(cliente, listaProd);
+        return solicOrcamento_UC.run(cliente, listaProd).toString();
         
     }
 
