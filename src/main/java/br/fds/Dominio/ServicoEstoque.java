@@ -9,14 +9,14 @@ import br.fds.Dominio.Entidades.Produto;
 
 @Service
 public class ServicoEstoque {
-    private IRepProdutos repProd;
+    private IRepProdutos repProdutos;
 
     @Autowired
-    public ServicoEstoque(IRepProdutos repProd) {
-        this.repProd = repProd;
+    public ServicoEstoque(IRepProdutos repProdutos) {
+        this.repProdutos = repProdutos;
     }
 
     public List<Produto> prodDisp() {
-        return repProd.all();
+        return repProdutos.all();
     }
 }

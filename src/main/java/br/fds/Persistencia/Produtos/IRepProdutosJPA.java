@@ -1,4 +1,4 @@
-package br.fds.Persistencia;
+package br.fds.Persistencia.Produtos;
 
 import java.util.List;
 

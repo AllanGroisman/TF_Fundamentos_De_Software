@@ -1,4 +1,4 @@
-package br.fds.Persistencia;
+package br.fds.Persistencia.Produtos;
 
 import br.fds.Dominio.IRepProdutos;
 import br.fds.Dominio.Entidades.Produto;
