@@ -1,0 +1,8 @@
+br\fds\Aplicacao\Servico\BuscaProdDisponivel_UC.class
+br\fds\App.class
+br\fds\Persistencia\IRepProdutosJPA.class
+br\fds\Dominio\Entidades\Produto.class
+br\fds\Persistencia\RepProdutosJPA.class
+br\fds\Dominio\ServicoEstoque.class
+br\fds\Interface\ControllerServicos.class
+br\fds\Dominio\IRepProdutos.class

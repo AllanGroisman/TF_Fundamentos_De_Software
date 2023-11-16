@@ -1,71 +1,67 @@
 package br.fds.Dominio.Entidades;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "produto")
 public class Produto {
     @Id
-    long codProd;
-    String descProd;
-    double precoProd;
+    private long codigo;
+    private String descricao;
+    private double preco;
 
-    //Quantidades em estoque
-    int qtdMin;
-    int qtdMax;
-    int qtdAtual = 0;
+    // Quantidades em estoque
+    private int qtd_min;
+    private int qtd_max;
+    private int qtd_atual;
 
-    //Construtor padrao
-    public Produto(long codProd, String descProd, double precoProd, int qtdMin, int qtdMax, int qtdAtual) {
-        this.codProd = codProd;
-        this.descProd = descProd;
-        this.precoProd = precoProd;
-        this.qtdMin = qtdMin;
-        this.qtdMax = qtdMax;
+    // Construtor padrao
+    public Produto(long codigo, String descricao, double preco, int qtdMin, int qtdMax, int qtdAtual) {
+        this.codigo = codigo;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.qtd_min = qtdMin;
+        this.qtd_max = qtdMax;
+        this.qtd_atual = qtdAtual;
     }
 
     // construtor vazio
     protected Produto() {
     }
+    
+
+    // GET
+    public long getCodigo() {
+        return codigo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public double getPreco() {
+        return preco;
+    };
+
+    public int getQtd_min() {
+        return qtd_min;
+    }
+
+    public int getQtd_max() {
+        return qtd_max;
+    }
+
+    public int getQtd_atual() {
+        return qtd_atual;
+    }
+
+    // SET
+    public void setQtd_atual(int qtdAtual) {
+        this.qtd_atual = qtdAtual;
+    }
 
     @Override
     public String toString() {
-        return "Produto [codProd=" + codProd + ", descProd=" + descProd + ", precoProd=" + precoProd + "]";
-    }
-
-    //GET
-    public long getCodProd() {
-        return codProd;
-    }
-
-    public String getDescProd() {
-        return descProd;
-    }
-
-    public double getPrecoProd() {
-        return precoProd;
-    };
-
-    public int getQtdMin() {
-        return qtdMin;
-    }
-
-    public int getQtdMax() {
-        return qtdMax;
-    }
-
-    public int getQtdAtual() {
-        return qtdAtual;
-    }
-
-    //SET
-    public void setQtdAtual(int qtdAtual) {
-        this.qtdAtual = qtdAtual;
+        return "Produto [codProd=" + codigo + ", descProd=" + descricao + ", precoProd=" + preco + "]";
     }
 }

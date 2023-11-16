@@ -3,11 +3,11 @@ package br.fds.Dominio;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import br.fds.Dominio.Entidades.Produto;
 
-@Component
+@Service
 public class ServicoEstoque {
     private IRepProdutos repProd;
 
@@ -17,6 +17,6 @@ public class ServicoEstoque {
     }
 
     public List<Produto> prodDisp() {
-        return repProd.findAll();
+        return repProd.all();
     }
 }
