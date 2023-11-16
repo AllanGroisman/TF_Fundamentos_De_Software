@@ -1,22 +1,18 @@
-package br.fds.Dominio;
+// package br.fds.Dominio;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.stereotype.Service;
 
-@Service
-public class ServicoEstatistica {
-    private IRepEstoque repEstoque;
-    private IRepOrcamentos repOrcamentos;
-    private IRepProdutos repProdutos;
+// @Service
+// public class ServicoEstatistica {
 
-    @Autowired
-    public ServicoEstatistica(IRepEstoque repEstoque, IRepOrcamentos repOrcamentos, IRepProdutos repProdutos) {
-        this.repEstoque = repEstoque;
-        this.repOrcamentos = repOrcamentos;
-        this.repProdutos = repProdutos;
-    }
+//     private IRepOrcamentos repOrcamentos;
+//     private IRepProdutos repProdutos;
 
-    
+//     @Autowired
+//     public ServicoEstatistica(IRepOrcamentos repOrcamentos, IRepProdutos repProdutos) {
+//         this.repOrcamentos = repOrcamentos;
+//         this.repProdutos = repProdutos;
+//     }
 
-    
-}
+// }

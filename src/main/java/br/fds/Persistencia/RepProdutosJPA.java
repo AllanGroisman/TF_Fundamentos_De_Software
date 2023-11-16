@@ -1,7 +1,12 @@
 package br.fds.Persistencia;
 
 import br.fds.Dominio.IRepProdutos;
+import br.fds.Dominio.Entidades.Produto;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -10,9 +15,33 @@ import org.springframework.stereotype.Repository;
 public class RepProdutosJPA implements IRepProdutos {
     IRepProdutosJPA repJPA;
 
+     @Autowired
     public RepProdutosJPA(IRepProdutosJPA repJPA) {
         this.repJPA = repJPA;
     }
+
+    @Override
+    public void save(Produto p) {
+        repJPA.save(p);
+    }
+
+    @Override
+    public List<Produto> findAll() {
+        return repJPA.findAll();
+    }
+
+    @Override
+    public void merge(Produto p) {
+        repJPA.merge(p);
+    }
+
+    @Override
+    public Produto findById(Long chave) {
+        return repJPA.findById(chave);
+    }
+
+    
+
 
     
 }

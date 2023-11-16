@@ -2,10 +2,10 @@ package br.fds;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@EnableJpaRepositories(basePackages = {"br.fds"})
 @SpringBootApplication
-@ComponentScan("br")
 public class App {
     public static void main(String[] args){
         SpringApplication.run(App.class,args);

@@ -8,4 +8,6 @@ import br.fds.Dominio.Entidades.Produto;
 
 public interface IRepProdutosJPA extends CrudRepository<Produto,Long> {
     List<Produto> findAll();
+
+    void merge(Produto p);
 }

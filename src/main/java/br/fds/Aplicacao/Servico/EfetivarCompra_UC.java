@@ -15,10 +15,19 @@ public class EfetivarCompra_UC {
     private ServicoEstoque servicoEstoque;
     private ServicoVenda servicoVenda;
 
-    public void run() {
-        // if(servicoVenda.efetivarCompra() && servicoEstoque.efetivarCompra()){
-        //     return true;
-        // }        
-        // return false;
+    public boolean run(Integer orcamento) {
+        //Listas para verificar disponibilidade de compra
+        List<Produto> listaEstoque = servicoEstoque.prodDisp();
+        List<Produto> listaOrcamento = servicoVenda.getProdutosOrcamento(orcamento);
+
+        //teste se estao disponiveis
+        if(listaEstoque.containsAll(listaOrcamento)){
+            //Se estiverem, efetiva a compra pelo servico de compra e retorna true
+            servicoVenda.efetivarCompra(orcamento);
+            return true;
+        }
+        //se não só retorna false
+        return false;
     }
+
 }

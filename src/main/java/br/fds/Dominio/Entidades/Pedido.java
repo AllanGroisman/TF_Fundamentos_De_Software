@@ -1,19 +1,16 @@
 package br.fds.Dominio.Entidades;
 
 import java.util.Map;
-
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String cliente;
-    private Map<Long, Integer> listaProd; // long = prodId, Integer = qtdProd
+    Map<Long,Integer> listaProd;
 
     public Pedido(String cliente, Map<Long, Integer> listaProd) {
         this.cliente = cliente;
@@ -30,5 +27,6 @@ public class Pedido {
     public Map<Long, Integer> getListaProd() {
         return listaProd;
     }
+
 
 }

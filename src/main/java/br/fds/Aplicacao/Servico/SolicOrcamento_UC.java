@@ -1,6 +1,7 @@
 package br.fds.Aplicacao.Servico;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ public class SolicOrcamento_UC {
     @Autowired
     private ServicoVenda servicoVenda;
 
-    public void run() {
-        //return servicoVenda.solicOrcamento();
+    public Orcamento run(String cliente,Map<Long,Integer> listaProd) {
+        return servicoVenda.solicOrcamento(cliente,listaProd);
     }
 }
