@@ -30,16 +30,25 @@ public class Orcamento {
     private double desconto;
     private double valorTotal; // valor p/ cliente pós descontos
 
-    public Orcamento(Pedido pedido, double custoTotal, LocalDate dataAtual) {
+    public Orcamento(Pedido pedido, double custoTotal, LocalDate dataAtual, Double desconto) {
         this.custoTotal = custoTotal;
         this.pedido = pedido;
         this.data = dataAtual;
+        this.desconto = desconto;
+        this.calcularValorTotal();
     }
 
     protected Orcamento(){}
 
     //GETS
-    public double getValorTotal() {
+    public double calcularValorTotal() {
+        //Comeca igual ao custo
+        valorTotal = custoTotal;
+        //Tira o desconto respectivo
+        valorTotal -= (custoTotal * desconto);
+        //Aplica o imposto
+        valorTotal += (valorTotal*imposto);
+        //retorna o valor
         return valorTotal;
     }
 
@@ -70,8 +79,6 @@ public class Orcamento {
         return efetuado;
     }
 
-    
-
     @Override
     public String toString() {
         return "Orcamento [id=" + id + ", data=" + data + ", pedido=" + pedido.toString() + ", custoTotal=" + custoTotal
@@ -86,5 +93,9 @@ public class Orcamento {
     }
     public void setEfetuado(boolean efetuado) {
         this.efetuado = efetuado;
+    }
+
+    public double getValorTotal() {
+        return this.valorTotal;
     }
 }

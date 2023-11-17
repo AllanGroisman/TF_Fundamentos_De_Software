@@ -1,11 +1,13 @@
 package br.fds.Dominio.Servicos;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.fds.Dominio.Desconto.FabricaDesconto;
 import br.fds.Dominio.Entidades.Orcamento;
 import br.fds.Dominio.Entidades.Pedido;
 import br.fds.Dominio.Entidades.Produto;
@@ -33,10 +35,31 @@ public class ServicoVenda {
         }
         // cria o pedido com o cliente e a lista
         Pedido pedido = new Pedido(cliente, listaProd);
+
         //Pega a data do momento
         LocalDate dataAtual = LocalDate.now();
+
+        //Calcula o desconto daquele cliente
+        //Cria a fabrica
+        FabricaDesconto fabricaDesconto = new FabricaDesconto();
+        //Pega o historico do cliente
+        List<Orcamento> historicoCliente = repOrcamentos.getHistorico(cliente);
+
+        System.out.println("HISTORICO CLIENTE: " + cliente);
+        int i = 0;
+        for (Orcamento orcamento : historicoCliente) {
+            System.out.println("ORCAMENTO X " + i);
+            i++;
+
+            System.out.println(orcamento.toString());
+        }
+        //calcula o desconto em cima do historico
+        System.out.println("DESCONTO ");
+        Double desconto = fabricaDesconto.criarPoliticaDesconto(historicoCliente,pedido.getListaProd().size());
+        System.out.println("DESCONTO: " + desconto);
+
         // cria o orcamento com todas as variaveis
-        Orcamento orcamento = new Orcamento(pedido,custoTotal,dataAtual);
+        Orcamento orcamento = new Orcamento(pedido,custoTotal,dataAtual,desconto);
         //salva no repositorio
         repOrcamentos.save(orcamento);
         //retorna ele mesmo

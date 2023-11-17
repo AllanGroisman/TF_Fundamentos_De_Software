@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 
 import br.fds.Dominio.Entidades.Orcamento;
 
+//Acima de 10k 10% e mais 5% para cada 10k ate 30%
 public class PoliticaMaisDez implements IPoliticaDesconto {
 
     @Override
     public double getDesconto(List<Orcamento> ultimasCompras) {
+        //return 0.30;
         //Pega o dia atual
         LocalDate dataAtual = LocalDate.now();
         //Tira 6 meses para pegar a data de 6 meses atras

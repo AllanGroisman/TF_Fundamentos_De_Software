@@ -1,5 +1,7 @@
 package br.fds.Persistencia.Orcamento;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -26,6 +28,11 @@ public class RepOrcamentosJPA implements IRepOrcamentos {
     public Orcamento getOrcamento(Long orcamentoId) {
         Orcamento optionalOrcamento = repJPA.findAll().stream().filter(f->f.getId().equals(orcamentoId)).findFirst().orElse(null);
         return optionalOrcamento; 
+    }
+
+    @Override
+    public List<Orcamento> getHistorico(String cliente) {
+        return repJPA.findAll().stream().filter(f->f.getCliente().equals(cliente)).toList();
     }
 
 }
