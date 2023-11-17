@@ -19,7 +19,17 @@ public class EfetivarCompra_UC {
     @Autowired
     private ServicoEstoque servicoEstoque;
 
-    public boolean run(Long orcamento) {
+    public String run(Long orcamento) {
+        // Pega o Orcamento requerido
+        Orcamento orcamentoAux = servicoVenda.getOrcamento(orcamento);
+
+        //se o orcamento ja passou do prazo de validade, só retorna falso e não faz nada
+        if(!orcamentoAux.getValidade()){
+            return "Orcamento sem validade";
+        }
+
+        // Pega o Map de id/qtd dos produtos do pedido dentro do orcamento
+        Map<Long, Integer> mapProdutosOrcamento = orcamentoAux.getListaPedido();
 
         // Lista de produtos disponiveis
         List<Produto> listaProdutosDisp = servicoEstoque.prodDisp();
@@ -34,14 +44,9 @@ public class EfetivarCompra_UC {
             mapProdDisp.put(produto.getId(), qtdDisp);
         }
 
-        // Orcamento requerido
-        Orcamento orcamentoAux = servicoVenda.getOrcamento(orcamento);
-        // Map de id/qtd dos produtos do pedido dentro do orcamento
-        Map<Long, Integer> mapProdutosOrcamento = orcamentoAux.getListaPedido();
-
-        //Testa a viabilidade da venda
+        // Testa a viabilidade da venda
         boolean viabilidade = true;
-        //Para cada produto
+        // Para cada produto
         for (Long chave : mapProdutosOrcamento.keySet()) {
             // Se não tiver a chave (não tem o produto disponivel), ja sai do for e nao é
             // viavel
@@ -58,16 +63,14 @@ public class EfetivarCompra_UC {
                 break;
             }
         }
-        // Se for viavel, executa e retorna true
+        
+        // Se for viavel, executa e retorna qe é viavel
         if (viabilidade) {
-            System.out.println("É VIAVEL");
             servicoVenda.efetivarCompra(orcamentoAux);
-            System.out.println();
-            return true;
+            return "Compra Efetivada";
         }
-        // se nao apenas retorna falso
-        System.out.println("NÃO É VIAVEL");
-        return false;
+        // se nao apenas retorna nao viavel 
+        return "Compra não Efetivada";
     }
 
 }

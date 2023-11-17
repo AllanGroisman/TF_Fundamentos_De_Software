@@ -68,11 +68,9 @@ public class ControllerServicos {
     // Efetivar compra do orcamento x
     public String efetivarCompra(@PathVariable("orcamento") Long orcamento) {
         // Transforma em long e chama o metodo
-        boolean efetivacao = efetivarCompra_UC.run(orcamento);
-        if (efetivacao) {
-            return "Compra Efetivada";
-        }
-        return "Compra Não Efetivada";
+        String efetivacao = efetivarCompra_UC.run(orcamento);
+        System.out.println(efetivacao);
+        return efetivacao;
     }
 
     // localhost:8080/

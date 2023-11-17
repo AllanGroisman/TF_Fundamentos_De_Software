@@ -1,6 +1,7 @@
 package br.fds.Dominio.Entidades;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Map;
 
 import jakarta.persistence.CascadeType;
@@ -19,6 +20,7 @@ public class Orcamento {
     private long id;
     private LocalDate data;
     private boolean efetuado = false;
+    private boolean valido = true;
     
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "pedido_id")
@@ -78,6 +80,37 @@ public class Orcamento {
      public boolean getEfetuado() {
         return efetuado;
     }
+    public double getValorTotal() {
+        return this.valorTotal;
+    }
+    public boolean getValidade(){
+        if(efetuado){ //Se o orcamento foi efetuado, será sempre válido
+            //valido comeca como true, logo nao precisa ser alterado
+            return valido;
+        }
+        //se não foi, tem que testar as datas
+        int prazo = 0;
+        Month mesCriacao = data.getMonth();
+        //se o mes de criacao do orcamento é de baixa temporada, o prazo é de 35 dias
+        if (mesCriacao == Month.JULY || mesCriacao == Month.DECEMBER || mesCriacao == Month.JANUARY || mesCriacao == Month.FEBRUARY) {
+            prazo = 35;
+        } else {
+            //se não o prazo é de 21
+            prazo = 21;
+        }
+        //Pega a data atual
+        LocalDate dataAtual = LocalDate.now();
+        //Pega uma data limite a partir da criacao do orcamento + o prazo em dias
+        LocalDate dataLimite = data.plusDays(prazo); 
+        //Se a data atual já é depois do limite, retorna falso
+        if(dataAtual.isAfter(dataLimite)){
+            //altera o valido para false
+            valido = false;
+            return valido;
+        }
+        //Se nao, retorna true (valido)
+        return valido;
+    }
 
     @Override
     public String toString() {
@@ -95,7 +128,5 @@ public class Orcamento {
         this.efetuado = efetuado;
     }
 
-    public double getValorTotal() {
-        return this.valorTotal;
-    }
+    
 }
