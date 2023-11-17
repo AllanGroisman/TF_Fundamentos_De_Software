@@ -1,9 +1,6 @@
 package br.fds.Interface;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.fds.Aplicacao.Estatistica.OrcamentosPosData_UC;
 import br.fds.Aplicacao.Estatistica.PrincipaisClientes_UC;
 import br.fds.Aplicacao.Estatistica.ProdutosIndisponiveis_UC;
-import br.fds.Dominio.Entidades.Orcamento;
-import br.fds.Dominio.Entidades.Produto;
 
 @RestController
 @RequestMapping("/estatisticas")

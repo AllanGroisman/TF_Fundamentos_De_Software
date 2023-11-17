@@ -14,6 +14,7 @@ import br.fds.Dominio.Servicos.ServicoVenda;
 
 @Component
 public class EfetivarCompra_UC {
+
     @Autowired
     private ServicoVenda servicoVenda;
     @Autowired
@@ -23,8 +24,9 @@ public class EfetivarCompra_UC {
         // Pega o Orcamento requerido
         Orcamento orcamentoAux = servicoVenda.getOrcamento(orcamento);
 
-        //se o orcamento ja passou do prazo de validade, só retorna falso e não faz nada
-        if(!orcamentoAux.getValidade()){
+        // se o orcamento ja passou do prazo de validade, só retorna falso e não faz
+        // nada
+        if (!orcamentoAux.getValidade()) {
             return "Orcamento sem validade";
         }
 
@@ -34,8 +36,7 @@ public class EfetivarCompra_UC {
         // Lista de produtos disponiveis
         List<Produto> listaProdutosDisp = servicoEstoque.prodDisp();
 
-        // Cria um Map a partir da lista de produtos para comparar com o map vindo do
-        // orcamento
+        // Cria um Map a partir da lista de produtos para comparar
         Map<Long, Integer> mapProdDisp = new HashMap<>();
         for (Produto produto : listaProdutosDisp) {
             int qtdAtual = produto.getQtd_atual();
@@ -47,6 +48,7 @@ public class EfetivarCompra_UC {
         // Testa a viabilidade da venda
         boolean viabilidade = true;
         // Para cada produto
+
         for (Long chave : mapProdutosOrcamento.keySet()) {
             // Se não tiver a chave (não tem o produto disponivel), ja sai do for e nao é
             // viavel
@@ -63,13 +65,13 @@ public class EfetivarCompra_UC {
                 break;
             }
         }
-        
+
         // Se for viavel, executa e retorna qe é viavel
         if (viabilidade) {
             servicoVenda.efetivarCompra(orcamentoAux);
             return "Compra Efetivada";
         }
-        // se nao apenas retorna nao viavel 
+        // se nao apenas retorna nao viavel
         return "Compra não Efetivada";
     }
 
