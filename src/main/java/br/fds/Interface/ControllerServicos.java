@@ -75,4 +75,8 @@ public class ControllerServicos {
         return "Compra Não Efetivada";
     }
 
+    // localhost:8080/
+    // localhost:8080/servicos/produtos
+    // localhost:8080/servicos/efetivarCompra/{orcamento}
+    // localhost:8080/servicos/orcamento/{cliente}/{produto}/{quantidade}
 }

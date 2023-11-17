@@ -73,5 +73,9 @@ public class Orcamento {
         return id;
     }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
+
 
 }
