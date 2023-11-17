@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.fds.Aplicacao.Servico.BuscaProdDisponivel_UC;
+import br.fds.Aplicacao.Servico.EfetivarCompra_UC;
 import br.fds.Aplicacao.Servico.SolicOrcamento_UC;
-import br.fds.Dominio.Entidades.Orcamento;
 import br.fds.Dominio.Entidades.Produto;
 
 @RestController
@@ -21,14 +21,16 @@ import br.fds.Dominio.Entidades.Produto;
 public class ControllerServicos {
     BuscaProdDisponivel_UC buscaProdDisponivel_UC;
     SolicOrcamento_UC solicOrcamento_UC;
-    
+    EfetivarCompra_UC efetivarCompra_UC;
 
     // Construtora
     @Autowired
-    public ControllerServicos(BuscaProdDisponivel_UC buscaProdDisponivel_UC,SolicOrcamento_UC solicOrcamento_UC) {
+    public ControllerServicos(BuscaProdDisponivel_UC buscaProdDisponivel_UC, SolicOrcamento_UC solicOrcamento_UC,
+            EfetivarCompra_UC efetivarCompra_UC) {
         this.buscaProdDisponivel_UC = buscaProdDisponivel_UC;
         this.solicOrcamento_UC = solicOrcamento_UC;
-        
+        this.efetivarCompra_UC = efetivarCompra_UC;
+
         System.out.println("\n\nCriado Controller Serviços\n\n");
     }
 
@@ -57,20 +59,20 @@ public class ControllerServicos {
         Map<Long, Integer> listaProd = new HashMap<Long, Integer>();
         listaProd.put(Long.parseLong(produto), Integer.parseInt(quantidade));
         return solicOrcamento_UC.run(cliente, listaProd).toString();
-        
+
     }
 
-    // // EFETIVAR ORCAMENTO
-    // @GetMapping("/efetivarCompra/{orcamento}")
-    // @CrossOrigin("*")
-    // // Solicitar efetivar compra
-    // public String efetivarCompra(@PathVariable("orcamento") String orcamento) {
-    //     boolean efetivacao = efetivarCompra_UC.run(Integer.parseInt(orcamento));
-
-    //     if (efetivacao) {
-    //         return "Compra Efetivada";
-    //     }
-    //     return "Compra Não Efetivada";
-    // }
+    // EFETIVAR ORCAMENTO
+    @GetMapping("/efetivarCompra/{orcamento}")
+    @CrossOrigin("*")
+    // Efetivar compra do orcamento x
+    public String efetivarCompra(@PathVariable("orcamento") Long orcamento) {
+        // Transforma em long e chama o metodo
+        boolean efetivacao = efetivarCompra_UC.run(orcamento);
+        if (efetivacao) {
+            return "Compra Efetivada";
+        }
+        return "Compra Não Efetivada";
+    }
 
 }

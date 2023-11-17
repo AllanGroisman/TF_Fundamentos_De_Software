@@ -20,4 +20,5 @@ public class ServicoEstoque {
     public List<Produto> prodDisp() {
         return repProdutos.all();
     }
+
 }

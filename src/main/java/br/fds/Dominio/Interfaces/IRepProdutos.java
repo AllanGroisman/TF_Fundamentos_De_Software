@@ -7,4 +7,5 @@ import br.fds.Dominio.Entidades.Produto;
 public interface IRepProdutos {
     void save(Produto p);
     List<Produto> all();
+    Produto getProduto(Long chave);
 }

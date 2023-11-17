@@ -6,6 +6,6 @@ public interface IRepOrcamentos {
 
     void save(Orcamento orcamento);
 
-    //Orcamento getOrcamento(Integer orcamento);
-    
+    Orcamento getOrcamento(Long orcamento);
+
 }

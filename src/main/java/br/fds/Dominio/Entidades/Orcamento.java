@@ -68,4 +68,10 @@ public class Orcamento {
     }
 
 
+    
+    public Long getId() {
+        return id;
+    }
+
+
 }

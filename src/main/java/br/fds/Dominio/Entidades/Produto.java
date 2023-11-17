@@ -31,7 +31,7 @@ public class Produto {
     
 
     // GET
-    public long getCodigo() {
+    public Long getId() {
         return codigo;
     }
 

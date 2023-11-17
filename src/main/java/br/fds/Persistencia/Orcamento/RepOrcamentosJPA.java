@@ -19,8 +19,13 @@ public class RepOrcamentosJPA implements IRepOrcamentos {
 
     @Override
     public void save(Orcamento orcamento) {
-       repJPA.save(orcamento);
+        repJPA.save(orcamento);
     }
 
-    
+    @Override
+    public Orcamento getOrcamento(Long orcamentoId) {
+        Orcamento optionalOrcamento = repJPA.findAll().stream().filter(f->f.getId().equals(orcamentoId)).findFirst().orElse(null);
+        return optionalOrcamento; 
+    }
+
 }

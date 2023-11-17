@@ -1,53 +1,27 @@
 package br.fds.Dominio.Servicos;
 
-//import java.util.ArrayList;
-//import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.fds.Dominio.Entidades.Orcamento;
 import br.fds.Dominio.Entidades.Pedido;
-//import br.fds.Dominio.Entidades.Produto;
+import br.fds.Dominio.Entidades.Produto;
 import br.fds.Dominio.Interfaces.IRepOrcamentos;
 import br.fds.Dominio.Interfaces.IRepProdutos;
 
 @Service
 public class ServicoVenda {
-    //private IRepProdutos repProdutos;
+    private IRepProdutos repProdutos;
     private IRepOrcamentos repOrcamentos;
 
     @Autowired
     public ServicoVenda(IRepProdutos repProdutos, IRepOrcamentos repOrcamentos) {
-        //this.repProdutos = repProdutos;
+        this.repProdutos = repProdutos;
         this.repOrcamentos = repOrcamentos;
-    }
-
-    // public boolean efetivarCompra(Integer orcamento) {
-    //     // acha o orcamento no repositorio
-    //     Orcamento orcamentoAux = repOrcamentos.getOrcamento(orcamento);
-
-    //     // acha o pedido a partir do orcamento
-    //     Pedido pedido = orcamentoAux.getPedido();
-
-    //     // pega a lista de itens (produto,quantidade) a partir do pedido
-    //     Map<Long, Integer> listaItens = pedido.getListaProd();
-
-    //     // Altera no repositorio as quantidades
-    //     //para cada produto (chave)
-    //     listaItens.forEach((chave, valor) -> {
-    //         //pega o produto
-    //         Produto produto = repProdutos.findById(chave);
-
-    //         //altera q qtd atual dele
-    //         produto.setQtdAtual(valor);
-
-    //         //atualiza no banco de dados
-    //         repProdutos.merge(produto);
-    //     });
-    //     return true;
-    // }
+    }   
 
     public Orcamento solicOrcamento(String cliente, Map<Long, Integer> listaProd) {
 
@@ -62,17 +36,25 @@ public class ServicoVenda {
         return orcamento;
     }
 
-    // public List<Produto> getProdutosOrcamento(Integer orcamento) {
-    //     // Puxa o orcamento do repositorio
-    //     Orcamento orcamentoAux = repOrcamentos.getOrcamento(orcamento);
-    //     // puxa a lista do pedido do orcamento
-    //     Map<Long, Integer> listaPedido = orcamentoAux.getListaPedido();
-    //     ArrayList<Produto> listaProdutos = new ArrayList<>();
-    //     listaPedido.forEach((chave, valor) -> {
-    //         Produto produto = repProdutos.findById(chave);
-    //         listaProdutos.add(produto);
-    //     });
-    //     return listaProdutos;
-    // }
+    public Orcamento getOrcamento(Long orcamento) {
+        return repOrcamentos.getOrcamento(orcamento);
+    }
+
+    public void efetivarCompra(Map<Long,Integer> listaItens) {
+        //para cada produto
+        for (Map.Entry<Long, Integer> entry : listaItens.entrySet()) {
+            //pega a chave e a qtd
+            Long chave = entry.getKey();
+            Integer qtdVendida = entry.getValue();
+            //acha o produto e o altera
+            Produto p = repProdutos.getProduto(chave);
+            int qtdAtual =p.getQtd_atual();
+            int qtdFinal = qtdAtual - qtdVendida;
+            p.setQtd_atual(qtdFinal);
+
+            //atualiza no repositorio
+            repProdutos.save(p);            
+        }
+    }
 
 }

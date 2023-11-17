@@ -37,7 +37,7 @@ public class Pedido {
         return cliente;
     }
 
-    public Map<Long, Integer> getListaProd() {
+    public Map<Long, Integer> getListaProd() {        
         return listaProd;
     }
 

@@ -29,6 +29,16 @@ public class RepProdutosJPA implements IRepProdutos {
         return repJPA.findAll();
     }
 
+    @Override
+    public Produto getProduto(Long chave) {
+        Produto produto = repJPA.findAll().stream().filter(f->f.getId().equals(chave)).findFirst().orElse(null);
+        return produto;
+    }
+
+    
+
+    
+
    
 
     
