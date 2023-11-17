@@ -44,24 +44,15 @@ public class ServicoVenda {
         FabricaDesconto fabricaDesconto = new FabricaDesconto();
         //Pega o historico do cliente
         List<Orcamento> historicoCliente = repOrcamentos.getHistorico(cliente);
-
-        System.out.println("HISTORICO CLIENTE: " + cliente);
-        int i = 0;
-        for (Orcamento orcamento : historicoCliente) {
-            System.out.println("ORCAMENTO X " + i);
-            i++;
-
-            System.out.println(orcamento.toString());
-        }
         //calcula o desconto em cima do historico
-        System.out.println("DESCONTO ");
-        Double desconto = fabricaDesconto.criarPoliticaDesconto(historicoCliente,pedido.getListaProd().size());
-        System.out.println("DESCONTO: " + desconto);
+        Double desconto = fabricaDesconto.criarPoliticaDesconto(historicoCliente);
 
         // cria o orcamento com todas as variaveis
         Orcamento orcamento = new Orcamento(pedido,custoTotal,dataAtual,desconto);
+
         //salva no repositorio
         repOrcamentos.save(orcamento);
+        
         //retorna ele mesmo
         return orcamento;
     }

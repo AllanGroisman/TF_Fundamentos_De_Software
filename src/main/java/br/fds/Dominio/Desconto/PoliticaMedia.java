@@ -1,10 +1,6 @@
 package br.fds.Dominio.Desconto;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import br.fds.Dominio.Entidades.Orcamento;
 
 //Pega a media dos ultimos 3 compras - 10% acima de 10.000 + 5% para cada 10.000 até 30%
