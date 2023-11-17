@@ -47,7 +47,8 @@ public class ServicoVenda {
         return repOrcamentos.getOrcamento(orcamento);
     }
 
-    public void efetivarCompra(Map<Long,Integer> listaItens) {
+    public void efetivarCompra(Orcamento orcamento) {
+        Map<Long,Integer> listaItens = orcamento.getListaPedido();
         //para cada produto
         for (Map.Entry<Long, Integer> entry : listaItens.entrySet()) {
             //pega a chave e a qtd
@@ -58,10 +59,13 @@ public class ServicoVenda {
             int qtdAtual =p.getQtd_atual();
             int qtdFinal = qtdAtual - qtdVendida;
             p.setQtd_atual(qtdFinal);
-
-            //atualiza no repositorio
+    
+            //atualiza o produo no repositorio
             repProdutos.save(p);            
         }
+        //atualiza o orcamento como efetuado
+        orcamento.setEfetuado(true);
+        repOrcamentos.save(orcamento);
     }
 
 }

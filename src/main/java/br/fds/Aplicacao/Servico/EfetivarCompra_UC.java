@@ -1,16 +1,13 @@
 package br.fds.Aplicacao.Servico;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.fds.Dominio.Entidades.Orcamento;
-import br.fds.Dominio.Entidades.Pedido;
 import br.fds.Dominio.Entidades.Produto;
 import br.fds.Dominio.Servicos.ServicoEstoque;
 import br.fds.Dominio.Servicos.ServicoVenda;
@@ -39,12 +36,12 @@ public class EfetivarCompra_UC {
 
         // Orcamento requerido
         Orcamento orcamentoAux = servicoVenda.getOrcamento(orcamento);
-        // Map de id/qtd do orcamento
-        Pedido pedidoAux = orcamentoAux.getPedido();
-        Map<Long, Integer> mapProdutosOrcamento = pedidoAux.getListaProd();
+        // Map de id/qtd dos produtos do pedido dentro do orcamento
+        Map<Long, Integer> mapProdutosOrcamento = orcamentoAux.getListaPedido();
 
         //Testa a viabilidade da venda
         boolean viabilidade = true;
+        //Para cada produto
         for (Long chave : mapProdutosOrcamento.keySet()) {
             // Se não tiver a chave (não tem o produto disponivel), ja sai do for e nao é
             // viavel
@@ -61,11 +58,10 @@ public class EfetivarCompra_UC {
                 break;
             }
         }
-
         // Se for viavel, executa e retorna true
         if (viabilidade) {
             System.out.println("É VIAVEL");
-            servicoVenda.efetivarCompra(mapProdutosOrcamento);
+            servicoVenda.efetivarCompra(orcamentoAux);
             System.out.println();
             return true;
         }

@@ -18,6 +18,7 @@ public class Orcamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private LocalDate data;
+    private boolean efetuado = false;
     
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "pedido_id")
@@ -65,6 +66,11 @@ public class Orcamento {
     public Pedido getPedido() {
         return pedido;
     }
+     public boolean getEfetuado() {
+        return efetuado;
+    }
+
+    
 
     @Override
     public String toString() {
@@ -77,5 +83,8 @@ public class Orcamento {
     //no desconto trocar para fabrica
     public void setDesconto(double desconto) {
         this.desconto = desconto;
+    }
+    public void setEfetuado(boolean efetuado) {
+        this.efetuado = efetuado;
     }
 }
