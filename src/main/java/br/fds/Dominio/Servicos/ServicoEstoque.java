@@ -20,7 +20,7 @@ public class ServicoEstoque {
 
     public List<Produto> prodDisp() {
         List<Produto> produtosDisponiveis = repProdutos.all().stream()
-                .filter(Produto::disponibilidade) // Filtrando os produtos com disponibilidade true
+                .filter(Produto::dispProd) // Filtrando os produtos com disponibilidade true
                 .collect(Collectors.toList());
         return produtosDisponiveis;
     }

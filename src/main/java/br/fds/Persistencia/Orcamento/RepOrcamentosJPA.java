@@ -35,4 +35,9 @@ public class RepOrcamentosJPA implements IRepOrcamentos {
         return repJPA.findAll().stream().filter(f->f.getCliente().equals(cliente)).toList();
     }
 
+    @Override
+    public List<Orcamento> all() {
+        return repJPA.findAll();
+    }
+
 }

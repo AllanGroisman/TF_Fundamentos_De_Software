@@ -59,7 +59,7 @@ public class Produto {
         this.qtd_atual = qtdAtual;
     }
 
-    public boolean disponibilidade() {
+    public boolean dispProd() {
         if (qtd_atual >= qtd_min) {
             return true;
         }
