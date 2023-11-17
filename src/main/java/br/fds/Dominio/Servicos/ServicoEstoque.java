@@ -1,6 +1,7 @@
 package br.fds.Dominio.Servicos;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,10 @@ public class ServicoEstoque {
     }
 
     public List<Produto> prodDisp() {
-        return repProdutos.all();
+        List<Produto> produtosDisponiveis = repProdutos.all().stream()
+                .filter(Produto::disponibilidade) // Filtrando os produtos com disponibilidade true
+                .collect(Collectors.toList());
+        return produtosDisponiveis;
     }
 
 }

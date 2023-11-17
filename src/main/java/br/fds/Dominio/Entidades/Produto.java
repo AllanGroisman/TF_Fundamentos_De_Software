@@ -28,7 +28,6 @@ public class Produto {
     // construtor vazio
     protected Produto() {
     }
-    
 
     // GET
     public Long getId() {
@@ -58,6 +57,13 @@ public class Produto {
     // SET
     public void setQtd_atual(int qtdAtual) {
         this.qtd_atual = qtdAtual;
+    }
+
+    public boolean disponibilidade() {
+        if (qtd_atual >= qtd_min) {
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -24,9 +24,7 @@ public class EfetivarCompra_UC {
 
     public boolean run(Long orcamento) {
 
-        System.out.println();
-
-        // Lista de produtos
+        // Lista de produtos disponiveis
         List<Produto> listaProdutosDisp = servicoEstoque.prodDisp();
 
         // Cria um Map a partir da lista de produtos para comparar com o map vindo do
@@ -45,6 +43,7 @@ public class EfetivarCompra_UC {
         Pedido pedidoAux = orcamentoAux.getPedido();
         Map<Long, Integer> mapProdutosOrcamento = pedidoAux.getListaProd();
 
+        //Testa a viabilidade da venda
         boolean viabilidade = true;
         for (Long chave : mapProdutosOrcamento.keySet()) {
             // Se não tiver a chave (não tem o produto disponivel), ja sai do for e nao é
