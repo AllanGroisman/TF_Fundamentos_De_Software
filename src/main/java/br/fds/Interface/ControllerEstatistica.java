@@ -40,12 +40,14 @@ public class ControllerEstatistica {
         this.orcamentosPosData_UC = orcamentosPosData_UC;
         this.principaisClientes_UC = principaisClientes_UC;
         this.produtosIndisponiveis_UC = produtosIndisponiveis_UC;
+
+        System.out.println("\n\nCriado Controller Estatistico\n\n");
     }
 
     // Quais sao os orcamentos efetuados a partir de tal data
     @GetMapping("/orcamentosPosData/{data}")
     @CrossOrigin("*")
-    public List<Orcamento> orcamentosPosData(@PathVariable("data") String data) {
+    public String orcamentosPosData(@PathVariable("data") String data) {
         LocalDate dataFormatado = LocalDate.parse(data);
         return orcamentosPosData_UC.run(dataFormatado);
 
@@ -54,14 +56,14 @@ public class ControllerEstatistica {
     // 3 Principais Clientes
     @GetMapping("/principaisClientes/")
     @CrossOrigin("*")
-    public Map<String,List<Orcamento>> principaisClientes() {
+    public String principaisClientes() {
         return principaisClientes_UC.run();
     }
 
     // Produtos que estao abaixo do minimo
     @GetMapping("/produtosIndisponiveis/")
     @CrossOrigin("*")
-    public List<Produto> produtosIndisponiveis() {
+    public String produtosIndisponiveis() {
         return produtosIndisponiveis_UC.run();
     }
 

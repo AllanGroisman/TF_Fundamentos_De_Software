@@ -15,7 +15,7 @@ public class OrcamentosPosData_UC {
     @Autowired
     private ServicoEstatistica servicoEstatistica;
 
-    public List<Orcamento> run(LocalDate dataFormatado) {
+    public String run(LocalDate dataFormatado) {
         return servicoEstatistica.orcamentoPosData(dataFormatado);
     }
     
