@@ -1,7 +1,6 @@
 package br.fds.Dominio.Desconto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import br.fds.Dominio.Entidades.Orcamento;
@@ -21,7 +20,13 @@ public class FabricaDesconto {
         listaDescontos.add(politicaMedia.getDesconto(ultimasCompras));
 
         // Pega o maior desconto e o retorna
-        double maiorValor = Collections.max(listaDescontos);
-        return maiorValor;
+        double maiorDesconto = 0.0;
+        for (Double double1 : listaDescontos) {
+            if(double1 > maiorDesconto){
+                maiorDesconto = double1;
+            }
+        }
+        
+        return maiorDesconto;
     }
 }

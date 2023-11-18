@@ -3,6 +3,7 @@ package br.fds.Dominio.Servicos;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,8 +43,9 @@ public class ServicoVenda {
         //Calcula o desconto daquele cliente
         //Cria a fabrica
         FabricaDesconto fabricaDesconto = new FabricaDesconto();
-        //Pega o historico do cliente
-        List<Orcamento> historicoCliente = repOrcamentos.getHistorico(cliente);
+        //Pega o historico do cliente e filtra apenas pelos efetuados
+        List<Orcamento> historicoCliente = repOrcamentos.getHistorico(cliente).stream()
+                            .filter(f->f.getEfetuado()).collect(Collectors.toList());
         //calcula o desconto em cima do historico
         Double desconto = fabricaDesconto.criarPoliticaDesconto(historicoCliente);
 

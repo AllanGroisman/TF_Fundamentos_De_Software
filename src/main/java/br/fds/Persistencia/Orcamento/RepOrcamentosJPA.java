@@ -31,7 +31,7 @@ public class RepOrcamentosJPA implements IRepOrcamentos {
     }
 
     @Override
-    public List<Orcamento> getHistorico(String cliente) {
+    public List<Orcamento> getHistorico(String cliente) { //
         return repJPA.findAll().stream().filter(f->f.getCliente().equals(cliente)).toList();
     }
 

@@ -69,12 +69,6 @@ public class ControllerServicos {
     public String efetivarCompra(@PathVariable("orcamento") Long orcamento) {
         // Transforma em long e chama o metodo
         String efetivacao = efetivarCompra_UC.run(orcamento);
-        System.out.println(efetivacao);
         return efetivacao;
     }
-
-    // localhost:8080/
-    // localhost:8080/servicos/produtos
-    // localhost:8080/servicos/efetivarCompra/{orcamento}
-    // localhost:8080/servicos/orcamento/{cliente}/{produto}/{quantidade}
 }

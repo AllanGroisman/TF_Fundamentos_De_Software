@@ -7,27 +7,31 @@ import br.fds.Dominio.Entidades.Orcamento;
 public class PoliticaMedia implements IPoliticaDesconto {
     @Override
     public double getDesconto(List<Orcamento> ultimasCompras) {
-
+    System.out.println("\n\n\nTESTE");
         int aux = ultimasCompras.size(); // Pega a ultima posicao
-        //Se tiver menos de 3 itens, retorna 0 na hora
+        // Se tiver menos de 3 itens, retorna 0 na hora
         if (aux < 3) {
             return 0.0;
         }
         // Calcular a média dos valores das últimas três compras
-        double media = (ultimasCompras.get(aux-1).getValorTotal() + ultimasCompras.get(aux - 2).getValorTotal()
-                + ultimasCompras.get(aux - 3).getValorTotal()) / 3;
+        double valorCompra1 = ultimasCompras.get(aux - 1).getValorTotal();
+        double valorCompra2 = ultimasCompras.get(aux - 2).getValorTotal();
+        double valorCompra3 = ultimasCompras.get(aux - 3).getValorTotal();
+        double media = (valorCompra1 + valorCompra2 + valorCompra3) / 3;
 
-        // desconto comeca como 0
+        System.out.println("\n\n\n" + valorCompra1 + " " + valorCompra2 + " " + valorCompra3 + " media: " + media);
+
         double desconto = 0.0;
-        // se for mais que 10k acrescenta desconto
         if (media > 10000) {
-            desconto += 0.10; // 10% de desconto se for acima de 10.000
-
-            // Adicionar 5% para cada 10.000 até 30%
-            double excedente = Math.max(0, media - 10000); // Pega o valor acima dos 10k
-            desconto += Math.min(excedente / 10000 * 0.05, 0.30); // Soma ate o maximo de 30%
+            desconto = 0.1;
+            double excedente = media - 10000;
+        
+            while (excedente >= 10000 && desconto < 0.3) {
+                desconto += 0.05;
+                excedente -= 10000;
+            }
         }
-        // retorna o desconto
         return desconto;
+        
     }
 }
