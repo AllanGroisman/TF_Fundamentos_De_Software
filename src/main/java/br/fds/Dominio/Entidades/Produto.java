@@ -60,7 +60,10 @@ public class Produto {
     }
 
     public boolean dispProd() {
-        if (qtd_atual >= qtd_min) {
+        if (qtd_atual == 0) { // se tem 0 produtos, nao ta disponivel
+            return false;
+        }
+        if (qtd_atual >= qtd_min) {// se tem menos do que o necessario pra vendar, ta falso
             return true;
         }
         return false;
@@ -72,6 +75,4 @@ public class Produto {
                 + ", qtd_max=" + qtd_max + ", qtd_atual=" + qtd_atual + "]";
     }
 
-    
-    
 }

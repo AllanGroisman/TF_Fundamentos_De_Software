@@ -40,8 +40,8 @@ public class EfetivarCompra_UC {
         Map<Long, Integer> mapProdDisp = new HashMap<>();
         for (Produto produto : listaProdutosDisp) {
             int qtdAtual = produto.getQtd_atual();
-            int qtdMin = produto.getQtd_min();
-            int qtdDisp = qtdAtual - qtdMin;
+            //int qtdMin = produto.getQtd_min();
+            int qtdDisp = qtdAtual;
             mapProdDisp.put(produto.getId(), qtdDisp);
         }
 
