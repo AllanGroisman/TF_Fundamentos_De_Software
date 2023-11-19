@@ -12,3 +12,4 @@ public class App {
         SpringApplication.run(App.class,args);
     }
 }
+//http://localhost:8080/h2-console/login.do?jsessionid=59e3408ba87b37536ee5efa76edaab29
