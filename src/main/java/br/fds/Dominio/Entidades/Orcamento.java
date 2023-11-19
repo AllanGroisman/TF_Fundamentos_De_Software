@@ -20,7 +20,6 @@ public class Orcamento {
     private long id;
     private LocalDate data;
     private boolean efetuado = false;
-    private boolean valido = true;
     
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "pedido_id")
@@ -84,10 +83,6 @@ public class Orcamento {
         return this.valorTotal;
     }
     public boolean getValidade(){
-        if(efetuado){ //Se o orcamento foi efetuado, será sempre válido
-            //valido comeca como true, logo nao precisa ser alterado
-            return valido;
-        }
         //se não foi, tem que testar as datas
         int prazo = 0;
         Month mesCriacao = data.getMonth();
@@ -104,12 +99,10 @@ public class Orcamento {
         LocalDate dataLimite = data.plusDays(prazo); 
         //Se a data atual já é depois do limite, retorna falso
         if(dataAtual.isAfter(dataLimite)){
-            //altera o valido para false
-            valido = false;
-            return valido;
+            return false;
         }
         //Se nao, retorna true (valido)
-        return valido;
+        return true;
     }
 
     @Override

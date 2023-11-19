@@ -54,11 +54,22 @@ public class ControllerServicos {
     @CrossOrigin("*")
     // Solicitar orcamento (por enquanto com 1)
     public String solicitarOrcamento(@PathVariable("cliente") String cliente,
-            @PathVariable("produto") String produto, @PathVariable("quantidade") String quantidade) {
+            @PathVariable("produto") String produtos,
+            @PathVariable("quantidade") String quantidades) {
+            
+        //separa cada prod e cada qtd
+        String[] listaProdutos = produtos.split("-");
+        String[] listaQuantidades = quantidades.split("-");
 
-        Map<Long, Integer> listaProd = new HashMap<Long, Integer>();
-        listaProd.put(Long.parseLong(produto), Integer.parseInt(quantidade));
-        return solicOrcamento_UC.run(cliente, listaProd).toString();
+        // cria um map com para os juntar os dois
+        Map<Long, Integer> mapProd = new HashMap<>();
+
+        // junta todos
+        for (int i = 0; i < listaProdutos.length; i++) {
+            mapProd.put(Long.parseLong(listaProdutos[i]), Integer.parseInt(listaQuantidades[i]));
+        }
+        
+        return solicOrcamento_UC.run(cliente, mapProd).toString();
 
     }
 

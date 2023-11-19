@@ -1,6 +1,7 @@
 package br.fds.Dominio.Servicos;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -59,12 +60,53 @@ public class ServicoVenda {
         return orcamento;
     }
 
-    public Orcamento getOrcamento(Long orcamento) {
-        return repOrcamentos.getOrcamento(orcamento);
-    }
+    public boolean efetivarCompra(Long idOrcamento) {
+        //pega o orcamento
+        Orcamento orcamentoAux = repOrcamentos.getOrcamento(idOrcamento);
 
-    public void efetivarCompra(Orcamento orcamento) {
-        Map<Long,Integer> listaItens = orcamento.getListaPedido();
+        //se le ja foi efetuado, nao efetua
+        if(orcamentoAux.getEfetuado()){
+            return false;
+        }
+        //se ele ta fora do prazo de validade, nao efetua
+        if(!orcamentoAux.getValidade()){ 
+            return false;
+        }
+
+        //pega o map de produtos do orcamento
+        Map<Long, Integer> listaItens = orcamentoAux.getListaPedido();
+
+        //pega a lista de prod disponiveis no catalogo
+        List<Produto> produtosDisponiveis = repProdutos.all().stream()
+        .filter(Produto::dispProd) // Filtrando os produtos com disponibilidade true
+        .collect(Collectors.toList());
+        
+        // Cria um Map a partir da lista de produtos disponiveis para comparar
+        Map<Long, Integer> mapProdDisp = new HashMap<>();
+        for (Produto produto : produtosDisponiveis) {
+            int qtdAtual = produto.getQtd_atual();
+            //int qtdMin = produto.getQtd_min();
+            int qtdDisp = qtdAtual;
+            mapProdDisp.put(produto.getId(), qtdDisp);
+        }
+        
+        //compara os dois
+        for (Long chave : listaItens.keySet()) {
+            // Se não tiver a chave (não tem o produto disponivel), ja sai do for e nao é
+            // viavel
+            if (!mapProdDisp.containsKey(chave)) {
+                return false;
+            }
+            int qtdDisp = mapProdDisp.get(chave);
+            int qtdReq = listaItens.get(chave);
+            // Se a quantidade daquele produto não é suficiente, ja sai do for e nao é
+            // viavel
+            if (qtdDisp < qtdReq) {
+                return false;
+            }
+        }
+
+        //EFETUA A COMPRA DE FATO
         //para cada produto
         for (Map.Entry<Long, Integer> entry : listaItens.entrySet()) {
             //pega a chave e a qtd
@@ -80,8 +122,9 @@ public class ServicoVenda {
             repProdutos.save(p);            
         }
         //atualiza o orcamento como efetuado
-        orcamento.setEfetuado(true);
-        repOrcamentos.save(orcamento);
+        orcamentoAux.setEfetuado(true);
+        repOrcamentos.save(orcamentoAux);
+        return true;
     }
 
 }
